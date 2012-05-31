@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2012 年 05 月 28 日 16:00
+-- 生成日期: 2012 年 05 月 29 日 07:08
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.5
 
@@ -54,6 +54,8 @@ CREATE TABLE IF NOT EXISTS `inbox` (
 -- 转存表中的数据 `inbox`
 --
 
+INSERT INTO `inbox` (`Addressor`, `Addressee`, `Title`, `Content`) VALUES
+('940194901@qq.com', 'meili@163.com', 'Hi', '');
 
 -- --------------------------------------------------------
 

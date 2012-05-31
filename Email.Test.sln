@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Test", "Email.Test\Email.Test.csproj", "{DB51C2F0-8977-4D76-8DB3-3CBE5013E75A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34D47913-0309-4BF8-A76B-DD8430C9A0E4}"
+	ProjectSection(SolutionItems) = preProject
+		Email.Test.vsmdi = Email.Test.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Domain", "Email.Domain\Email.Domain.csproj", "{D319096F-8523-4F12-866E-4E740D78E04C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Data", "Email.Data\Email.Data.csproj", "{B648FB90-8400-40F6-996C-96C2C1726DB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailUI", "EmailUI\EmailUI.csproj", "{4FD1403A-77F3-4AA2-9DE8-36ABFCA358D0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D319096F-8523-4F12-866E-4E740D78E04C} = {D319096F-8523-4F12-866E-4E740D78E04C}
+		{B648FB90-8400-40F6-996C-96C2C1726DB1} = {B648FB90-8400-40F6-996C-96C2C1726DB1}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Email.Test.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB51C2F0-8977-4D76-8DB3-3CBE5013E75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB51C2F0-8977-4D76-8DB3-3CBE5013E75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB51C2F0-8977-4D76-8DB3-3CBE5013E75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB51C2F0-8977-4D76-8DB3-3CBE5013E75A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D319096F-8523-4F12-866E-4E740D78E04C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D319096F-8523-4F12-866E-4E740D78E04C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D319096F-8523-4F12-866E-4E740D78E04C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D319096F-8523-4F12-866E-4E740D78E04C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B648FB90-8400-40F6-996C-96C2C1726DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B648FB90-8400-40F6-996C-96C2C1726DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B648FB90-8400-40F6-996C-96C2C1726DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B648FB90-8400-40F6-996C-96C2C1726DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD1403A-77F3-4AA2-9DE8-36ABFCA358D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD1403A-77F3-4AA2-9DE8-36ABFCA358D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD1403A-77F3-4AA2-9DE8-36ABFCA358D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD1403A-77F3-4AA2-9DE8-36ABFCA358D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

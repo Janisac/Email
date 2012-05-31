@@ -18,11 +18,40 @@ namespace EmailSysterm.Data
         public void CreateUser(User userInfo)
         {
             Session.Save(userInfo);
-            Session.Flush( );
+            //Session.Flush( );
+            Session.Close();
         }
+
+       public bool InsertUser(User userInfo) 
+        {             
+            ITransaction transaction = Session.BeginTransaction();
+            try { Session.Save(userInfo); transaction.Commit(); return true; } 
+            catch (Exception e)
+            { transaction.Rollback(); return false; }
+            finally { Session.Close(); }
+        }
+
+       public bool UpdateUser(User userInfo)
+       {
+           ITransaction transaction = Session.BeginTransaction();
+           try{  Session.Update(userInfo); transaction.Commit();   return true;   }
+           catch (Exception e) { transaction.Rollback();  return false;       }
+           finally {  Session.Close(); }
+       }
+
+       public bool DeleteUser(User userInfo)
+        {
+            ITransaction transaction = Session.BeginTransaction();
+            try { Session.Delete(userInfo); transaction.Commit(); return true; }
+            catch (Exception e) { transaction.Rollback(); return false; }
+            finally { Session.Close(); }
+        }
+
         public User GetUserByEmail(String Email)
         {
             return Session.Get<User>(Email);
         }
+
+        
     }
 }

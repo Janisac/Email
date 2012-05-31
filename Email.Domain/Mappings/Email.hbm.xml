@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+   assembly="Email.Domain"
+   namespace="Email.Domain.Entities">
+
+  <class name ="User" table="user">
+    <id name="Email" column ="Email">
+      <generator class ="native"/>
+    </id>
+    <property name="Email"/>
+    <property name ="PassWord"/>
+  </class>
+
+    <class name ="MessageInbox" table="MessageInbox">
+        <id name="Sender" column ="Sender" >
+            <generator class ="native"/>
+        </id>
+        <property name ="Sender"/>
+        <property name ="Receiver"/>
+        <property name ="Topic"/>
+        <property name ="Content"/>
+    </class>
+    
+</hibernate-mapping>
