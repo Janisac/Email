@@ -24,4 +24,7 @@ namespace Email.Data
             return _sessionFactory.OpenSession();
         }
     }
+    public class UserHelper {
+        public static string uEmail = "";
+    }
 }

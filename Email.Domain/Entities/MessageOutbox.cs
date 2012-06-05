@@ -7,6 +7,7 @@ namespace Email.Domain.Entities
 {
     public  class MessageOutbox
     {
+        public virtual string MessageoutId { get; set; }
         public virtual string Sender { get; set; }
         public virtual string Receiver { get; set; }
         public virtual string Topic { get; set; }

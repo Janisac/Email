@@ -11,14 +11,35 @@
     <property name ="PassWord"/>
   </class>
 
-    <class name ="MessageInbox" table="MessageInbox">
-        <id name="Sender" column ="Sender" >
-            <generator class ="native"/>
-        </id>
-        <property name ="Sender"/>
-        <property name ="Receiver"/>
-        <property name ="Topic"/>
-        <property name ="Content"/>
-    </class>
-    
+  <class name ="Linkman" table="linkman">
+    <id name ="LinkmanId" column ="LinkmanId">
+      <generator class ="native"/>
+    </id>
+    <property name ="LinkmanId"/>
+    <property name ="Sender"/>
+    <property name ="Receiver"/>  
+  </class>
+
+  <class name ="MessageInbox" table="messageinbox">
+    <id name="MessageinId" column ="MessageinId" >
+      <generator class ="native"/>
+    </id>
+    <property name ="MessageinId"/>
+    <property name ="Sender"/>
+    <property name ="Receiver"/>
+    <property name ="Topic"/>
+    <property name ="Content"/>
+  </class>
+
+  <class name ="MessageOutbox" table="messageoutbox">
+    <id name="MessageoutId" column ="MessageoutId" >
+      <generator class ="native"/>
+    </id>
+    <property name ="MessageoutId"/>
+    <property name ="Sender"/>
+    <property name ="Receiver"/>
+    <property name ="Topic"/>
+    <property name ="Content"/>
+  </class>
+  
 </hibernate-mapping>

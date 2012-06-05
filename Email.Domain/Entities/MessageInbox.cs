@@ -10,6 +10,7 @@ namespace Email.Domain.Entities
     /// </summary>
    public  class MessageInbox
     {
+       public virtual string MessageinId { get; set; }
         public virtual string Sender { get; set; }
         public virtual string Receiver { get; set; }
         public virtual string Topic { get; set; }

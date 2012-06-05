@@ -43,32 +43,88 @@ namespace Email.Data
        }*/
 
         // 按发件人查询
-        public IList GetMessageInboxBySender(String Sender)
+        public IList<MessageInbox> GetMessageInboxBySender(String Sender)
         {
             NHibernateHelper helper = new NHibernateHelper();
             ISession session = helper.GetSession();
-            //return Session.Get<MessageInbox>(Sender);
-            return session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
-                .Add(NHibernate.Criterion.Restrictions.Eq("Sender", Sender))
-                .List();
+            try
+            {
+                ICriteria crit1 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
+                                .Add(NHibernate.Criterion.Restrictions.Eq("Receiver",UserHelper.uEmail ))
+                               .Add(NHibernate.Criterion.Restrictions.Eq("Sender", Sender));
+                  crit1.SetMaxResults(50);
+                IList<MessageInbox> messagesin1 = crit1.List<MessageInbox>();
+                return messagesin1;
+            }
+            catch (Exception e)
+            { throw e; }   
         }
        
         // 按主题查询
-        public IList GetMessageInboxByTopic(String Topic)
+        public IList<MessageInbox> GetMessageInboxByTopic(String Topic)
         {
             NHibernateHelper helper = new NHibernateHelper();
             ISession session = helper.GetSession();
-            return session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
-                .Add(NHibernate.Criterion.Restrictions.Eq("Topic", Topic))
-                .List();
+            try
+            {
+                ICriteria crit2 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
+                                 .Add(NHibernate.Criterion.Restrictions.Eq("Receiver",UserHelper.uEmail ))
+                                 .Add(NHibernate.Criterion.Restrictions.Eq("Topic", Topic));
+                crit2.SetMaxResults(50);
+                IList<MessageInbox> messagesin2 = crit2.List<MessageInbox>();
+                return messagesin2;
+            }
+            catch (Exception e)
+            { throw e; }   
         }
 
         // 获取收件箱所有邮件
-        public IList GetAllMessageInbox()
+        public IList<MessageInbox> GetAllMessageInbox()
         {
             NHibernateHelper helper = new NHibernateHelper();
             ISession session = helper.GetSession();
-            return session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox)).List();
+            try
+            {
+                ICriteria crit3 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
+                              .Add(NHibernate.Criterion.Restrictions.Eq( "Receiver",UserHelper.uEmail));
+                              
+                crit3.SetMaxResults(50);
+                IList<MessageInbox>  messagesin3= crit3.List<MessageInbox>();
+                return messagesin3;
+            }
+            catch (Exception e)
+            { throw e; }   
         }
+
+       
+
+        // 添加收件箱信息
+         public void AddMessageInbox(MessageInbox message)
+        {
+            NHibernateHelper helper = new NHibernateHelper();
+            ISession Session = helper.GetSession();          
+            if (message != null)
+               Session.Save(message);          
+        }
+      /*  public void AddMessageInbox(Object messageinbox)
+        {
+            NHibernateHelper helper = new NHibernateHelper();
+            ISession Session = helper.GetSession();
+            ITransaction transaction = Session.BeginTransaction();
+            try 
+            { 
+                Session.Save(messageinbox); 
+                transaction.Commit(); 
+            }
+            catch (Exception e)
+            { 
+                transaction.Rollback();
+                throw e;
+            }
+            finally 
+            { 
+                Session.Close(); 
+            }
+        }*/
     }
 }

@@ -57,7 +57,7 @@
             this.tabControl1.Location = new System.Drawing.Point(40, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(332, 100);
+            this.tabControl1.Size = new System.Drawing.Size(556, 109);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -144,7 +144,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(324, 74);
+            this.tabPage3.Size = new System.Drawing.Size(548, 83);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "查询所有邮件";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -165,12 +165,12 @@
             this.dataGridView1.Location = new System.Drawing.Point(40, 136);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(328, 100);
+            this.dataGridView1.Size = new System.Drawing.Size(552, 138);
             this.dataGridView1.TabIndex = 1;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(375, 212);
+            this.button4.Location = new System.Drawing.Point(602, 213);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(59, 23);
             this.button4.TabIndex = 2;
@@ -180,7 +180,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(183, 246);
+            this.button5.Location = new System.Drawing.Point(234, 280);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 3;
@@ -192,13 +192,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 281);
+            this.ClientSize = new System.Drawing.Size(695, 353);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.tabControl1);
             this.Name = "MessageOutbox";
             this.Text = "MessageOutbox";
+            this.Load += new System.EventHandler(this.MessageOutbox_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

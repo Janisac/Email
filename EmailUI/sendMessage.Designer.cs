@@ -45,7 +45,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "发件人";
+            this.label1.Text = "收件人";
             // 
             // label2
             // 
@@ -84,32 +84,34 @@
             this.textBox3.Location = new System.Drawing.Point(103, 119);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(135, 21);
+            this.textBox3.Size = new System.Drawing.Size(309, 139);
             this.textBox3.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(30, 202);
+            this.button1.Location = new System.Drawing.Point(103, 264);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "发送";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(154, 201);
+            this.button2.Location = new System.Drawing.Point(337, 264);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
             this.button2.Text = "返回";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // sendMessage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(461, 323);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox3);
@@ -120,6 +122,7 @@
             this.Controls.Add(this.label1);
             this.Name = "sendMessage";
             this.Text = "sendMessage";
+            this.Load += new System.EventHandler(this.sendMessage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

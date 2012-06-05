@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
+
 using NHibernate;
 using NHibernate.Cfg;
 using Email.Domain.Entities;
@@ -16,63 +17,87 @@ namespace Email.Data
 
 
        //根据邮箱查询用户（status）
-       public IList GetUserByEmail(string Email)
+       public Email.Domain.Entities.User GetUserByEmail(string Email)
        {
            NHibernateHelper helper = new NHibernateHelper();
            ISession session = helper.GetSession();
-
-           return session.CreateCriteria(typeof(Email.Domain.Entities.User))
+           return session.Get<Email.Domain.Entities.User>(Email);
+          /* return session1.CreateCriteria(typeof(Email.Domain.Entities.User))
                .Add(NHibernate.Criterion.Restrictions.Eq("Email", Email))
-               .List();
+               .List();*/
        } 
-       /*public User GetUserByEmail(String Email)
-        {
-            NHibernateHelper helper = new NHibernateHelper();
-            ISession Session = helper.GetSession();
-            return Session.Get<User>(Email);
-        }*/
-        /*public void CreateUser(User userInfo)
-        {
-            NHibernateHelper helper = new NHibernateHelper();
-            ISession Session = helper.GetSession();
-            Session.Save(userInfo);
-            //Session.Flush( );
-            Session.Close();
-        }*/
-
-       public bool AddUser(User user) 
-        {
-            NHibernateHelper helper = new NHibernateHelper();
-            ISession Session = helper.GetSession();
-            ITransaction transaction = Session.BeginTransaction();
-            try { Session.Save(user); transaction.Commit(); return true; } 
-            catch (Exception e)
-            { transaction.Rollback(); return false; }
-            finally { Session.Close(); }
-        }
-
-       public bool UpdateUser(User userInfo)
+      
+       // 添加用户
+       public void AddUser(User user)
        {
            NHibernateHelper helper = new NHibernateHelper();
            ISession Session = helper.GetSession();
-           ITransaction transaction = Session.BeginTransaction();
-           try{  Session.Update(userInfo); transaction.Commit();   return true;   }
-           catch (Exception e) { transaction.Rollback();  return false;       }
-           finally {  Session.Close(); }
+           string useremail;
+           if(user != null)
+            useremail = (string)Session.Save(user);
+          // return useremail;
        }
 
-       public bool DeleteUser(User userInfo)
+      /* public void  AddUser(Object  user) 
         {
             NHibernateHelper helper = new NHibernateHelper();
-            ISession Session = helper.GetSession();
-            ITransaction transaction = Session.BeginTransaction();
-            try { Session.Delete(userInfo); transaction.Commit(); return true; }
-            catch (Exception e) { transaction.Rollback(); return false; }
-            finally { Session.Close(); }
-        }
-
-       
-
-        
+            ISession session = helper.GetSession();
+            ITransaction transaction = session.BeginTransaction();
+            try
+            {
+                session.Save(user);
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                 throw e;
+            }
+            finally
+            {
+                session.Close();
+            }
+        }*/
+       public void UpdateUser(Object user)
+       {
+           NHibernateHelper helper = new NHibernateHelper();
+           ISession session = helper.GetSession();
+           ITransaction transaction = session.BeginTransaction();
+           try
+           {
+               session.Update(user);
+               transaction.Commit();
+           }
+           catch (Exception e )
+           {
+               transaction.Rollback();
+               throw  e;
+           }
+           finally
+           {
+               session.Close();
+           }
+       }
+       public void DeleteUser(Object user)
+       {
+           NHibernateHelper helper = new NHibernateHelper();
+           ISession session = helper.GetSession();
+           ITransaction transaction = session.BeginTransaction();
+           try
+           {
+               session.Delete(user);
+               transaction.Commit();
+           }
+           catch (Exception e)
+           {
+               transaction.Rollback();
+               throw e;
+           }
+           finally
+           {
+               session.Close();
+           }
+       }
+     
     }
 }
