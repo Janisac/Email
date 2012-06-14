@@ -47,13 +47,18 @@ namespace EmailUI
             else
             {
                 Email.Domain.Entities.Linkman linkman = new Email.Domain.Entities.Linkman();
+                Email.Domain.Entities.Linkman linkman2 = new Email.Domain.Entities.Linkman();
                 Email.Domain.Entities.User user = new Email.Domain.Entities.User();
                 linkman.Receiver = textBox1.Text;
                 linkman.Sender = UserHelper.uEmail;
                 string id1 = textBox1.Text;
+                linkman2.Receiver = UserHelper.uEmail;
+                linkman2.Sender = textBox1.Text;
                 user.Email = id1;
                 string id2 = UserHelper.uEmail + textBox1.Text;
+                string id22 = textBox1.Text + UserHelper.uEmail;
                 linkman.LinkmanId = id2;
+                linkman2.LinkmanId = id22;
                 Email.Domain.Entities.User testuser;
                 Email.Data.UserData userdata = new UserData();
                 testuser = userdata.GetUserByEmail(id1);
@@ -71,6 +76,7 @@ namespace EmailUI
                     else
                     {
                         linkmandata.AddLinkman(linkman);
+                        linkmandata.AddLinkman(linkman2);
                         Email.Domain.Entities.Linkman testlinkmans1 = linkmandata.GetLinkmanByLinkmanId(id2);
                         if (testlinkmans1 != null)
                             MessageBox.Show("添加成功！");
