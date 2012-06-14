@@ -94,5 +94,83 @@ namespace Email.Data
                 Session.Close(); 
             }
         }*/
+
+        // 按收件人删除邮件
+        public void DeleteMessageOutboxByReceiver(String sender, String receiver)
+        {
+            NHibernateHelper helper = new NHibernateHelper();
+            ISession session = helper.GetSession();
+            try
+            {
+                ICriteria crit4 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageOutbox))
+                              .Add(NHibernate.Criterion.Restrictions.Eq("Sender", sender))
+                              .Add(NHibernate.Criterion.Restrictions.Eq("Receiver", receiver));
+                crit4.SetMaxResults(50);
+                IList<MessageOutbox> messagesin4 = crit4.List<MessageOutbox>();
+                foreach (MessageOutbox message in messagesin4)
+                {
+                    session.Delete(message);
+                    session.Flush();
+                }
+            }
+            catch (Exception e)
+            { throw e; }
+        }
+
+        // 按主题删除邮件
+        public void DeleteMessageOutboxByTopic(String sender, String topic)
+        {
+            NHibernateHelper helper = new NHibernateHelper();
+            ISession session = helper.GetSession();
+            try
+            {
+                ICriteria crit5 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageOutbox))
+                              .Add(NHibernate.Criterion.Restrictions.Eq("Sender", sender))
+                              .Add(NHibernate.Criterion.Restrictions.Eq("Topic", topic));
+                crit5.SetMaxResults(50);
+                IList<MessageOutbox> messagesin5 = crit5.List<MessageOutbox>();
+                foreach (MessageOutbox message in messagesin5)
+                {
+                    session.Delete(message);
+                    session.Flush();
+                }
+            }
+            catch (Exception e)
+            { throw e; }
+        }
+
+        //  删除所有邮件
+        public void DeleteAllMessageOutbox()
+        {
+            //MessageOutboxData lessageoutboxdata = new MessageOutboxData();
+            NHibernateHelper helper = new NHibernateHelper();
+            ISession session = helper.GetSession();
+            try
+            {
+                ICriteria crit6 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageOutbox))
+                              .Add(NHibernate.Criterion.Restrictions.Eq("Sender", UserHelper.uEmail));
+
+                crit6.SetMaxResults(50);
+                IList<MessageOutbox> messagesin6 = crit6.List<MessageOutbox>();
+                foreach (MessageOutbox message in messagesin6)
+                {
+                    session.Delete(message);
+                    session.Flush();
+                }
+            }
+            catch (Exception e)
+            { throw e; }
+        }
+
+       
+         // 按id查询发件箱
+        public Email.Domain.Entities.MessageOutbox GetMessageOutboxById(string messageoutboxid)
+        {
+            NHibernateHelper helper = new NHibernateHelper();
+            ISession session = helper.GetSession();
+            return session.Get<Email.Domain.Entities.MessageOutbox>(messageoutboxid);
+
+        }        
     }
 }
+

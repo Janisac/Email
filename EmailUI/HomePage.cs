@@ -56,6 +56,13 @@ namespace EmailUI
         private void HomePage_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            PIManager pimanager = new PIManager();
+            pimanager.Show();
+            this.Hide();
         }      
     }
 }

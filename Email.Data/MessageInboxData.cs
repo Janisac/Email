@@ -13,6 +13,14 @@ namespace Email.Data
     {
         public MessageInboxData()
         { }
+        // 添加收件箱信息
+        public void AddMessageInbox(MessageInbox message)
+        {
+            NHibernateHelper helper = new NHibernateHelper();
+            ISession Session = helper.GetSession();
+            if (message != null)
+                Session.Save(message);
+        }
         /*protected ISession Session { get; set; }
         public MessageInboxData(ISession session)
         {
@@ -96,16 +104,90 @@ namespace Email.Data
             { throw e; }   
         }
 
+         // 按发件人删除邮件
+         public void DeleteMessageInboxBySender(String sender,String receiver)
+         {
+             NHibernateHelper helper = new NHibernateHelper();
+             ISession session = helper.GetSession();
+             try
+             {
+                 ICriteria crit4 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
+                               .Add(NHibernate.Criterion.Restrictions.Eq("Sender", sender))
+                               .Add(NHibernate.Criterion.Restrictions.Eq("Receiver",receiver));
+                 crit4.SetMaxResults(50);
+                 IList<MessageInbox> messagesin4 = crit4.List<MessageInbox>();                             
+                 foreach (MessageInbox message in messagesin4)
+                 {
+                     session.Delete(message);
+                     session.Flush();
+                 }
+             }
+            catch (Exception e)
+             { throw e; }  
+         }
+
+
+         // 按主题删除邮件
+         public void DeleteMessageInboxByTopic(String topic, String receiver)
+         {
+             NHibernateHelper helper = new NHibernateHelper();
+             ISession session = helper.GetSession();
+             try
+             {
+                 ICriteria crit5 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
+                               .Add(NHibernate.Criterion.Restrictions.Eq("Topic", topic))
+                               .Add(NHibernate.Criterion.Restrictions.Eq("Receiver", receiver));
+                 crit5.SetMaxResults(50);
+                 IList<MessageInbox> messagesin5 = crit5.List<MessageInbox>();
+                 foreach (MessageInbox message in messagesin5)
+                 {
+                     session.Delete(message);
+                     session.Flush();
+                 }
+             }
+             catch (Exception e)
+             { throw e; }  
+         }
+
+        //  删除所有邮件
+         public void DeleteAllMessageInbox()
+         {
+             //MessageInboxData messageinboxdata = new MessageInboxData();
+             NHibernateHelper helper = new NHibernateHelper();
+             ISession session = helper.GetSession();
+             try
+             {
+                 ICriteria crit6 = session.CreateCriteria(typeof(Email.Domain.Entities.MessageInbox))
+                               .Add(NHibernate.Criterion.Restrictions.Eq("Receiver", UserHelper.uEmail));
+
+                 crit6.SetMaxResults(50);
+                 IList<MessageInbox> messagesin6 = crit6.List<MessageInbox>();
+                 foreach (MessageInbox message in messagesin6)
+                 {
+                     session.Delete(message);
+                     session.Flush();
+                 }
+             }
+             catch (Exception e)
+             { throw e; }   
+         }
+
+
+         // 按id查询收件箱
+         public Email.Domain.Entities.MessageInbox GetMessageInboxById(string messageinboxid)
+         {
+             NHibernateHelper helper = new NHibernateHelper();
+             ISession session = helper.GetSession();
+             return session.Get<Email.Domain.Entities.MessageInbox>(messageinboxid);
+
+         } 
+
+    }
+
        
 
-        // 添加收件箱信息
-         public void AddMessageInbox(MessageInbox message)
-        {
-            NHibernateHelper helper = new NHibernateHelper();
-            ISession Session = helper.GetSession();          
-            if (message != null)
-               Session.Save(message);          
-        }
+        
+
       /*  public void AddMessageInbox(Object messageinbox)
         {
             NHibernateHelper helper = new NHibernateHelper();
@@ -126,5 +208,5 @@ namespace Email.Data
                 Session.Close(); 
             }
         }*/
-    }
+    
 }

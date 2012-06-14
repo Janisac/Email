@@ -126,6 +126,12 @@
     <Compile Include="MessageOutbox.Designer.cs">
       <DependentUpon>MessageOutbox.cs</DependentUpon>
     </Compile>
+    <Compile Include="PIManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PIManager.Designer.cs">
+      <DependentUpon>PIManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="run.cs" />
     <Compile Include="sendMessage.cs">
@@ -150,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MessageOutbox.resx">
       <DependentUpon>MessageOutbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PIManager.resx">
+      <DependentUpon>PIManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sendMessage.resx">
       <DependentUpon>sendMessage.cs</DependentUpon>

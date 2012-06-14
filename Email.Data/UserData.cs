@@ -21,7 +21,12 @@ namespace Email.Data
        {
            NHibernateHelper helper = new NHibernateHelper();
            ISession session = helper.GetSession();
-           return session.Get<Email.Domain.Entities.User>(Email);
+           try
+           {
+               return session.Get<Email.Domain.Entities.User>(Email);
+           }
+          catch (Exception e)
+            { throw e; }  
           /* return session1.CreateCriteria(typeof(Email.Domain.Entities.User))
                .Add(NHibernate.Criterion.Restrictions.Eq("Email", Email))
                .List();*/
@@ -38,26 +43,15 @@ namespace Email.Data
           // return useremail;
        }
 
-      /* public void  AddUser(Object  user) 
-        {
-            NHibernateHelper helper = new NHibernateHelper();
-            ISession session = helper.GetSession();
-            ITransaction transaction = session.BeginTransaction();
-            try
-            {
-                session.Save(user);
-                transaction.Commit();
-            }
-            catch (Exception e)
-            {
-                transaction.Rollback();
-                 throw e;
-            }
-            finally
-            {
-                session.Close();
-            }
-        }*/
+       // 删除用户
+       /*public void DeleteUser(User user)
+       {
+           NHibernateHelper helper = new NHibernateHelper();
+           ISession session = helper.GetSession();         
+           session.Delete(user);
+           session.Flush();
+       }*/
+      
        public void UpdateUser(Object user)
        {
            NHibernateHelper helper = new NHibernateHelper();
@@ -78,6 +72,7 @@ namespace Email.Data
                session.Close();
            }
        }
+
        public void DeleteUser(Object user)
        {
            NHibernateHelper helper = new NHibernateHelper();
