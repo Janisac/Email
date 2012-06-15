@@ -18,51 +18,57 @@ namespace EmailUI
             //toolStripStatusLabel1.Text = UserHelper.uEmail;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        
+        private void HomePage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             sendMessage sendmessage = new sendMessage();
             sendmessage.Show();
             this.Hide();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             MessageOutbox messageoutbox = new MessageOutbox();
             messageoutbox.Show();
             this.Hide();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             MessageInbox messageinbox = new MessageInbox();
             messageinbox.Show();
             this.Hide();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem4_Click(object sender, EventArgs e)
         {
             Linkman linkman = new Linkman();
             linkman.Show();
             this.Hide();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            PIManager pimanager = new PIManager();
+            pimanager.Show();
+            this.Hide();
+        }
+
+        private void ToolStripMenuItem6_Click(object sender, EventArgs e)
         {
             Logging logging = new Logging();
             logging.Show();
             this.Hide();
         }
 
-        private void HomePage_Load(object sender, EventArgs e)
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            PIManager pimanager = new PIManager();
-            pimanager.Show();
-            this.Hide();
         }      
     }
 }

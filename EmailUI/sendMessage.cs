@@ -14,14 +14,14 @@ namespace EmailUI
     public partial class sendMessage : Form
     {
         private Email.Data.LinkmanData linkmandata;
-       // private Email.Data.MessageInboxData messageinboxdata;
-       // private Email.Data.MessageOutboxData messageoutboxdata;
-       // private System.Collections.IList clist;
+        // private Email.Data.MessageInboxData messageinboxdata;
+        // private Email.Data.MessageOutboxData messageoutboxdata;
+        // private System.Collections.IList clist;
         public sendMessage()
         {
             InitializeComponent();
         }
-
+                
         // 发送邮件
         private void button1_Click(object sender, EventArgs e)
         {
@@ -29,42 +29,50 @@ namespace EmailUI
                 MessageBox.Show("不能含有空信息！");
             else
             {
-                Email.Domain.Entities.Linkman linkman = new Email.Domain.Entities.Linkman();
-                linkman.Receiver = textBox1.Text;
                 Email.Domain.Entities.MessageInbox messageinbox = new Email.Domain.Entities.MessageInbox();
                 Email.Domain.Entities.MessageOutbox messageoutbox = new Email.Domain.Entities.MessageOutbox();
                 Email.Data.MessageInboxData messageinboxdata = new Email.Data.MessageInboxData();
                 Email.Data.MessageOutboxData messageoutboxdata = new Email.Data.MessageOutboxData();
 
-                messageinbox.MessageinId = messageoutbox.MessageoutId = DateTime.Now.ToString();
+                Email.Domain.Entities.Linkman linkman = new Email.Domain.Entities.Linkman();
+                string[] arr = textBox1.Text.Split(';');
+                int number = arr.Length;
+
+                int num,  j, k = 0;
+                string[] arr1 = new string[number];
+                string string1 = "", string2 = "";
+                for (num = 0; num < number; num++)
+                {
+                    IList<Email.Domain.Entities.Linkman> lm;
+                    linkmandata = new Email.Data.LinkmanData();
+                    lm = linkmandata.GetLinkmanByReceiver(UserHelper.uEmail, arr[num]);
+                    if (lm.Count == 0)
+                        string1 = string1 + arr[num] + ";";
+                    else
+                    {
+                        string2 = string2 + arr[num] + ";";
+                        arr1[k++] = arr[num];
+                    }
+                }
+                
                 messageinbox.Sender = messageoutbox.Sender = UserHelper.uEmail;
-                messageinbox.Receiver = messageoutbox.Receiver = textBox1.Text;
                 messageinbox.Topic = messageoutbox.Topic = textBox2.Text;
-                messageinbox.Content = messageoutbox.Content = textBox3.Text;
+                messageinbox.Content = messageoutbox.Content = "收件人：" + string2 + "\n" + textBox3.Text;
 
-                IList<Email.Domain.Entities.Linkman> lm;
-                // Email.Domain.Entities.Linkman linkmans ;
-                linkmandata = new Email.Data.LinkmanData();
-                lm = linkmandata.GetLinkmanByReceiver(UserHelper.uEmail, textBox1.Text);
-                if (lm.Count == 0)
+                if(string1 != null)
+                    MessageBox.Show(string1 + "不是你的联系人，请于好友界面添加！");
+                if(k != 0)
                 {
-                    MessageBox.Show("此收件人不是你的联系人，请于好友界面添加！");
-                    this.Hide();
-                    HomePage homepage = new HomePage();
-                    homepage.Show();
-
-                }
-                else
-                {
-                    messageinboxdata.AddMessageInbox(messageinbox);
-                    messageoutboxdata.AddMessageOutbox(messageoutbox);
-                    MessageBox.Show("邮件发送成功！");
-                    textBox1.Clear();
-                    textBox2.Clear();
-                    textBox3.Clear();
-                }
+                    for (j = 0; j < k; j++)
+                    {
+                        messageinbox.MessageinId = messageoutbox.MessageoutId = DateTime.Now.ToString();
+                        messageinbox.Receiver = messageoutbox.Receiver = arr1[j];
+                        messageoutboxdata.AddMessageOutbox(messageoutbox);
+                        messageinboxdata.AddMessageInbox(messageinbox);
+                    }
+                    MessageBox.Show("已成功将邮件发送给" + string2 );
+                } 
             }
-            
         }
 
         // 返回
@@ -78,6 +86,7 @@ namespace EmailUI
         private void sendMessage_Load(object sender, EventArgs e)
         {
 
-        }        
+        }
+
     }
 }
